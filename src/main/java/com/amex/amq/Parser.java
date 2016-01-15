@@ -50,22 +50,26 @@ public class Parser {
 		}
 	}
 
-	public String getString(String section, String key, String defaultvalue) {
+	public String getString(String section, String key) {
 		Map<String, String> kv = _entries.get(section);
 		if (kv == null) {
-			return defaultvalue;
+			throw new NullPointerException("Section " + section + "does not exist");
 		}
-		return kv.get(key);
+		String value = kv.get(key);
+		if (value == null) {
+			throw new NullPointerException("Section " + section + "does not exist");
+		}
+		return value;
 	}
 
-	public int getInt(String section, String key, int defaultvalue) {
-		Map<String, String> kv = _entries.get(section);
-		if (kv == null) {
-			return defaultvalue;
-		}
-		return Integer.parseInt(kv.get(key));
+	public int getInt(String section, String key){
+		String value = getString(section, key);
+		return Integer.parseInt(value);
 	}
 
+	public float getFloat(String section, String key) {
+		return getFloat(section, key, 0f);
+	}
 	public float getFloat(String section, String key, float defaultvalue) {
 		Map<String, String> kv = _entries.get(section);
 		if (kv == null) {

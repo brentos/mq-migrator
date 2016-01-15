@@ -1,10 +1,11 @@
-package com.amex.amq.initranslation;
+package com.redhat.amq.initranslation;
 
 import java.io.File;
 
 import org.junit.Test;
 
 import com.dbove.testing.Testing;
+import com.redhat.amq.initranslation.IniParser;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;

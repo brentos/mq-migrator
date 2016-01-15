@@ -36,20 +36,11 @@
 			<version>4.4</version>
 		</dependency>
 
-		<!-- Unused currently -->
 		<dependency>
 			<groupId>org.apache.activemq</groupId>
 			<artifactId>activemq-all</artifactId>
 			<version>5.9.0</version>
 		</dependency>
-
-		<!-- XML Writer -->
-		<dependency>
-			<groupId>javax.xml.parsers</groupId>
-			<artifactId>jaxp-api</artifactId>
-			<version>1.4.5</version>
-		</dependency>
-
 
 	</dependencies>
 </project>

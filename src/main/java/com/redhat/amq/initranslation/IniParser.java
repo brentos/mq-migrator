@@ -12,7 +12,9 @@ import java.util.regex.Pattern;
 public class IniParser {
 
 	//private Pattern _section = Pattern.compile( "\\s*\\[([^]]*)\\]\\s*" );
+		//Classic ini files use [Section}
 	private Pattern _section = Pattern.compile("\\w*:");
+		//Currently using ini files with Section:
 
 	private Pattern _keyValue = Pattern.compile("\\s*([^=]*)=(.*)");
 	private Map<String, Map<String, String>> _entries = new HashMap<>();

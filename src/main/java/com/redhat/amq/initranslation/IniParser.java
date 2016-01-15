@@ -1,4 +1,4 @@
-package com.amex.amq.initranslation;
+package com.redhat.amq.initranslation;
 
 import java.io.BufferedReader;
 import java.io.File;

@@ -52,6 +52,10 @@ public class IniParser {
 			}
 		}
 	}
+	
+	public Map<String, Map<String, String>> getMap() {
+		return _entries;
+	}
 
 	public String getString(String section, String key) {
 		Map<String, String> kv = _entries.get(section);

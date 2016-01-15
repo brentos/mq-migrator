@@ -31,7 +31,7 @@ public class Parser {
 					//section = m.group(1).trim();
 					section = line.substring(0, line.length()-1);	
 					//Remove the : at the end of the section
-					System.out.println(section);
+					//System.out.println(section);
 				} else if (section != null) {
 					m = _keyValue.matcher(line);
 					if (m.matches()) {

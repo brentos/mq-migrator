@@ -19,9 +19,12 @@ public class ParserTest {
 		
 		Parser p = new Parser(f);
 		
-		
-		//assertEquals(p.getInt("LogDefaults", "LogPrimaryFiles", 0), 3);
-
+		assertEquals(p.getInt("LogDefaults", "LogPrimaryFiles", 0), 3);
+		assertEquals(p.getInt("LogDefaults", "LogSecondaryFiles", 0), 2);
+		assertEquals(p.getInt("LogDefaults", "LogFilePages", 0), 4096);
+		assertEquals(p.getString("LogDefaults", "LogType", ""), "CIRCULAR");
+		assertEquals(p.getInt("LogDefaults", "LogBufferPages", 0), 0);
+		assertEquals(p.getString("LogDefaults", "LogDefaultPath", ""), "/var/mqm/log");
 
 	}
 

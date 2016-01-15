@@ -1,4 +1,4 @@
-package com.amex.amq;
+package com.amex.amq.initranslation;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Parser {
+public class IniParser {
 
 	//private Pattern _section = Pattern.compile( "\\s*\\[([^]]*)\\]\\s*" );
 	private Pattern _section = Pattern.compile("\\w*:");
@@ -17,9 +17,13 @@ public class Parser {
 	private Pattern _keyValue = Pattern.compile("\\s*([^=]*)=(.*)");
 	private Map<String, Map<String, String>> _entries = new HashMap<>();
 
-	public Parser(File file) throws IOException {
+	public IniParser(File file) throws IOException {
 		load(file);
 	}
+	
+	//TODO Key-Values without Sections?
+	
+	//TODO Repeat Sections-- ie 2 QueueManager sections
 
 	public void load(File file) throws IOException {
 		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
@@ -31,14 +35,11 @@ public class Parser {
 					//section = m.group(1).trim();
 					section = line.substring(0, line.length()-1);	
 					//Remove the : at the end of the section
-					//System.out.println(section);
 				} else if (section != null) {
 					m = _keyValue.matcher(line);
 					if (m.matches()) {
 						String key = m.group(1).trim();
-						//System.out.println(key);
 						String value = m.group(2).trim();
-						//System.out.println(value);
 						Map<String, String> kv = _entries.get(section);
 						if (kv == null) {
 							_entries.put(section, kv = new HashMap<>());
@@ -53,11 +54,11 @@ public class Parser {
 	public String getString(String section, String key) {
 		Map<String, String> kv = _entries.get(section);
 		if (kv == null) {
-			throw new NullPointerException("Section " + section + "does not exist");
+			throw new NullPointerException("Section " + section + " does not exist");
 		}
 		String value = kv.get(key);
 		if (value == null) {
-			throw new NullPointerException("Section " + section + "does not exist");
+			throw new NullPointerException("Key " + key + " does not exist");
 		}
 		return value;
 	}
@@ -68,21 +69,12 @@ public class Parser {
 	}
 
 	public float getFloat(String section, String key) {
-		return getFloat(section, key, 0f);
-	}
-	public float getFloat(String section, String key, float defaultvalue) {
-		Map<String, String> kv = _entries.get(section);
-		if (kv == null) {
-			return defaultvalue;
-		}
-		return Float.parseFloat(kv.get(key));
+		String value = getString(section, key);
+		return Float.parseFloat(value);
 	}
 
-	public double getDouble(String section, String key, double defaultvalue) {
-		Map<String, String> kv = _entries.get(section);
-		if (kv == null) {
-			return defaultvalue;
-		}
-		return Double.parseDouble(kv.get(key));
+	public double getDouble(String section, String key) {
+		String value = getString(section, key);
+		return Double.parseDouble(value);
 	}
 }

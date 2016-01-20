@@ -23,13 +23,13 @@ import com.dbove.testing.Testing;
 /*
  * Loads a basic activemq.xml file with DOM Parser for editing
  * and writing into new configuration file
- * 
  */
 public class ActivemqXmlWriter {
 	
-	private Document doc;
-	
 	private static String BASE_CONFIG_FILE = "activemq.xml";
+	
+	private Document doc;
+	private Element rootElement;
 	
 	public ActivemqXmlWriter() throws ParserConfigurationException, TransformerException, SAXException, IOException {
 		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
@@ -37,7 +37,12 @@ public class ActivemqXmlWriter {
 		
 		File template = Testing.getFile(BASE_CONFIG_FILE);
 		doc = docBuilder.parse(template);
+		
+		rootElement = doc.getDocumentElement();
 	}
+	
+	// TODO write methods to edit rootElement
+	// Can use appendChild() removeChild(), setAttribute()...
 	
 	public String getXmlString() throws TransformerException {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
